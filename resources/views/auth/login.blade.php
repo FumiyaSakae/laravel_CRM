@@ -65,7 +65,7 @@
                                 <div class="col-md-8 offset-md-4">
                                     <button style="background-color:#00A69D; color:#fff; border:0" type="submit"
                                         class="btn btn-primary">
-                                        {{ __('Log in') }}
+                                        {{ __('ログイン') }}
                                     </button>
 
                                     @if (Route::has('password.request'))
