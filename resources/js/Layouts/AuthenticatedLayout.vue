@@ -21,7 +21,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                <ApplicationLogo class="block w-10 w-auto fill-current text-gray-800" />
+                                <ApplicationLogo class="block w-8 fill-current text-gray-800" />
                                 </Link>
                             </div>
 
@@ -29,6 +29,9 @@ const showingNavigationDropdown = ref(false);
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
+                                </NavLink>
+                                <NavLink :href="route('hrs.index')" :active="route().current('hrs.index')">
+                                    人材管理
                                 </NavLink>
                             </div>
                         </div>
@@ -89,6 +92,9 @@ const showingNavigationDropdown = ref(false);
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('hrs.index')" :active="route().current('hrs.index')">
+                            人材管理
                         </ResponsiveNavLink>
                     </div>
 

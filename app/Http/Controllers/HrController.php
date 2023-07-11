@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreHrRequest;
 use App\Http\Requests\UpdateHrRequest;
 use App\Models\Hr;
+use Inertia\Inertia;
 
 class HrController extends Controller
 {
@@ -13,7 +14,10 @@ class HrController extends Controller
      */
     public function index()
     {
-        //
+        $hrs = Hr::select('id', 'name', 'price', 'is_selling')->get();
+        return Inertia::render('Hrs/index', [
+            'hrs' => $hrs,
+        ]);
     }
 
     /**
@@ -21,7 +25,7 @@ class HrController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Hrs/create');
     }
 
     /**
@@ -29,7 +33,22 @@ class HrController extends Controller
      */
     public function store(StoreHrRequest $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:20'],
+            'price' =>['required'],
+        ]);
+
+        Hr::create([
+            'name' => $request->name,
+            'memo' => $request->memo,
+            'price' => $request->price,
+        ]);
+
+        return to_route('hrs.index')
+        ->with([
+            'message' => '登録しました。',
+            'status' => 'success'
+        ]);
     }
 
     /**
@@ -37,7 +56,9 @@ class HrController extends Controller
      */
     public function show(Hr $hr)
     {
-        //
+        return Inertia::render('Hrs/show', [
+            'hr' => $hr
+        ]);
     }
 
     /**
@@ -45,7 +66,9 @@ class HrController extends Controller
      */
     public function edit(Hr $hr)
     {
-        //
+        return Inertia::render('Hrs/edit',[
+            'hr' => $hr
+        ]);
     }
 
     /**
@@ -53,7 +76,18 @@ class HrController extends Controller
      */
     public function update(UpdateHrRequest $request, Hr $hr)
     {
-        //
+        // dd($hr->name, $request->name);
+        $hr->name = $request->name;
+        $hr->memo = $request->memo;
+        $hr->price = $request->price;
+        $hr->is_selling = $request->is_selling;
+        $hr->save();
+
+        return to_route('hrs.index')
+        ->with([
+            'message' => '更新が完了しました。',
+            'status' => 'success'
+        ]);
     }
 
     /**
@@ -61,6 +95,12 @@ class HrController extends Controller
      */
     public function destroy(Hr $hr)
     {
-        //
+        $hr->delete();
+
+        return to_route('hrs.index')
+        ->with([
+            'message' => '削除しました',
+            'status' => 'danger'
+        ]);
     }
 }

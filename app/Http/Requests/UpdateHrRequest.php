@@ -11,7 +11,7 @@ class UpdateHrRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateHrRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'max:50'],
+            'price' =>['required', 'numeric'],
+            'is_selling' =>['required', 'numeric']
         ];
     }
 }
