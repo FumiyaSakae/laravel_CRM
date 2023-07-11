@@ -99,7 +99,7 @@ class HrController extends Controller
 
         return to_route('hrs.index')
         ->with([
-            'message' => '削除しました',
+            'message' => '削除が完了しました',
             'status' => 'danger'
         ]);
     }
