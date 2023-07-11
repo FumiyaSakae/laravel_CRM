@@ -123,10 +123,9 @@ li {
     background-color: #fff;
   }
 
-  .logo_img{
+  .logo_img {
     width: 80%;
     height: auto;
-    
   }
 
   #container {
@@ -134,15 +133,15 @@ li {
   }
 
   .main {
-    padding-left:20%;
+    padding-left: 20%;
   }
 
-  .page-name{
+  .page-name {
     height: 100px;
     background-color: #ccc;
   }
 
-  .contentsWrap{
+  .contentsWrap {
     height: 100%;
     background-color: #fff;
     padding: 10px;
@@ -160,15 +159,15 @@ li {
     margin-top: 10px;
   }
 
-  .header_nav_link{
-    color:#fff;
+  .header_nav_link {
+    color: #fff;
     height: 80px;
     display: block;
     text-align: center;
     line-height: 80px;
   }
 
-  .header_nav_link:hover{
+  .header_nav_link:hover {
     font-weight: bold;
     color: #000;
     background-color: #ccc;

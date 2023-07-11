@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\HrController;
 use App\Http\Controllers\PageController;
 
 /*
@@ -17,13 +18,12 @@ use App\Http\Controllers\PageController;
 |
 */
 
+// 顧客管理ルーティングページ
+Route::resource('hrs', HrController::class)->middleware(['auth', 'verified']);
+
+// Practiceルーティングページ
 Route::get('/Top', function () {
     return Inertia::render('TopPage');
-    }
-);
-
-Route::get('/component-test', function () {
-    return Inertia::render('ComponentTest');
     }
 );
 
@@ -33,6 +33,10 @@ Route::post('/Top',[PageController::class, 'store'])->name('topPage.store');
 Route::get('/Top/show/{id}',[PageController::class, 'show'])->name('topPage.show');
 Route::delete('/Top/{id}',[PageController::class, 'delete'])->name('topPage.delete');
 
+Route::get('/component-test', function () {
+    return Inertia::render('ComponentTest');
+    }
+);
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
