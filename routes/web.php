@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HrController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PageController;
 
 /*
@@ -20,6 +21,7 @@ use App\Http\Controllers\PageController;
 
 // 顧客管理ルーティングページ
 Route::resource('hrs', HrController::class)->middleware(['auth', 'verified']);
+Route::resource('customers', CustomerController::class)->middleware(['auth', 'verified']);
 
 // Practiceルーティングページ
 Route::get('/Top', function () {

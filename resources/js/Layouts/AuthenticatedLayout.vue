@@ -33,6 +33,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('hrs.index')" :active="route().current('hrs.index')">
                                     人材管理
                                 </NavLink>
+                                <NavLink :href="route('customers.index')" :active="route().current('customers.index')">
+                                    取引先管理
+                                </NavLink>
                             </div>
                         </div>
 
@@ -95,6 +98,9 @@ const showingNavigationDropdown = ref(false);
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('hrs.index')" :active="route().current('hrs.index')">
                             人材管理
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('customers.index')" :active="route().current('customers.index')">
+                            取引先管理
                         </ResponsiveNavLink>
                     </div>
 

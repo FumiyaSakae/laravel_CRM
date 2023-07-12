@@ -156,6 +156,16 @@ return [
     'attributes' => [
         'name' => '名前',
         'price' => '単価',
+        'company_name' => '会社名',
+        'pic_name' => '担当者名',
+        'pic_kana'=> 'カナ',
+        'gender'=> '性別',
+        'tel' => '電話番号',
+        'email' => 'メールアドレス',
+        'postcode' => '郵便番号',
+        'address' => '住所',
+        'startDate' => '取引開始日',
+        'memo' => '備考',
     ],
 
 ];
