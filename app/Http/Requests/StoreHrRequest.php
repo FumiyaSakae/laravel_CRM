@@ -23,7 +23,7 @@ class StoreHrRequest extends FormRequest
     {
         return [
                 'name' => ['required', 'max:50'],
-                'price' =>['required', 'numeric'],
+                'min_price' =>['required', 'numeric'],
         ];
     }
 }

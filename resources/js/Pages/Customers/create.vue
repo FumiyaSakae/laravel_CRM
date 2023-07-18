@@ -84,11 +84,11 @@ const fetchAddress = () => {
                       <div class="p-2 w-full">
                         <div class="relative">
                           <label class="leading-7 text-sm text-gray-600">性別</label>
-                          <input type="radio" id="gender" name="price" v-model="form.gender" value="0">
+                          <input type="radio" id="gender" name="gender" v-model="form.gender" value="0">
                           <label for="gender0" class="ml-2 mr-4">男性</label>
-                          <input type="radio" id="gender" name="price" v-model="form.gender" value="1">
+                          <input type="radio" id="gender" name="gender" v-model="form.gender" value="1">
                           <label for="gender1" class="ml-2 mr-4">女性</label>
-                          <input type="radio" id="gender" name="price" v-model="form.gender" value="2">
+                          <input type="radio" id="gender" name="gender" v-model="form.gender" value="2">
                           <label for="gender2" class="ml-2 mr-4">その他</label>
                         </div>
                       </div>

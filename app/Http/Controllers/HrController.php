@@ -14,7 +14,7 @@ class HrController extends Controller
      */
     public function index()
     {
-        $hrs = Hr::select('id', 'name', 'price', 'is_selling')->get();
+        $hrs = Hr::select('id', 'name', 'min_price', 'is_selling')->get();
         return Inertia::render('Hrs/index', [
             'hrs' => $hrs,
         ]);
@@ -35,13 +35,13 @@ class HrController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:20'],
-            'price' =>['required'],
+            'min_price' =>['required'],
         ]);
 
         Hr::create([
             'name' => $request->name,
             'memo' => $request->memo,
-            'price' => $request->price,
+            'min_price' => $request->min_price,
         ]);
 
         return to_route('hrs.index')
@@ -76,10 +76,9 @@ class HrController extends Controller
      */
     public function update(UpdateHrRequest $request, Hr $hr)
     {
-        // dd($hr->name, $request->name);
         $hr->name = $request->name;
         $hr->memo = $request->memo;
-        $hr->price = $request->price;
+        $hr->min_price = $request->min_price;
         $hr->is_selling = $request->is_selling;
         $hr->save();
 

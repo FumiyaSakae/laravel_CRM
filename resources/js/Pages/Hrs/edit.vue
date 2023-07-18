@@ -13,7 +13,7 @@ const form = reactive({
   id: props.hr.id,
   name: props.hr.name,
   memo: props.hr.memo,
-  price: props.hr.price,
+  min_price: props.hr.min_price,
   is_selling: props.hr.is_selling
 })
 
@@ -63,10 +63,10 @@ const updateHr = id => {
                     </div> -->
                       <div class="p-2 w-full">
                         <div class="relative">
-                          <label for="price" class="leading-7 text-sm text-gray-600">単価</label>
-                          <input type="number" id="price" name="price" v-model="form.price"
+                          <label for="min_price" class="leading-7 text-sm text-gray-600">単価</label>
+                          <input type="number" id="min_price" name="min_price" v-model="form.min_price"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          <div class="text-sm text-red-600" v-if="errors.price">{{ errors.price }}</div>
+                          <div class="text-sm text-red-600" v-if="errors.min_price">{{ errors.min_price }}</div>
                         </div>
                       </div>
                       <div class="p-2 w-full">
@@ -79,16 +79,16 @@ const updateHr = id => {
                       <div class="p-2 w-full">
                         <div class="relative">
                           <label for="is_selling" class="leading-7 text-sm text-gray-600">ステータス</label>
-                          <input type="radio" id="is_selling" name="price" v-model="form.is_selling" value="1">
+                          <input type="radio" id="is_selling" name="min_price" v-model="form.is_selling" value="1">
                           <label class="ml-2 mr-4">稼働中</label>
-                          <input type="radio" id="is_selling" name="price" v-model="form.is_selling" value="0">
+                          <input type="radio" id="is_selling" name="min_price" v-model="form.is_selling" value="0">
                           <label class="ml-2 mr-4">待機中</label>
                         </div>
                       </div>
 
                       <div class="p-2 w-full">
                         <button
-                          class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">更新</button>
+                          class="flex mx-auto text-white bg-teal-500 border-0 py-2 px-8 focus:outline-none hover:bg-teal-600 rounded text-lg">更新</button>
                       </div>
                       <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
                         <a class="text-indigo-500">example@email.com</a>

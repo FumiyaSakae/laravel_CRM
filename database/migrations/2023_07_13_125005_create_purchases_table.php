@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hrs', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('name_kana');
-            $table->string('memo')->nullable();
-            $table->integer('min_price');
-            $table->integer('current_price')->nullable();
-            $table->tinyInteger('is_selling')->default(1);
+            $table->foreignId('customer_id')->constrained()->onUpdate('cascade');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hrs');
+        Schema::dropIfExists('purchases');
     }
 };

@@ -52,7 +52,7 @@ defineProps({
                           <Link class="text-blue-400" :href="route('hrs.show', { hr: hr.id })">{{ hr.id }}</Link>
                         </td>
                         <td class="px-4 py-3 border-b-2 border-gray-200">{{ hr.name }}</td>
-                        <td class="px-4 py-3 border-b-2 border-gray-200">{{ hr.price }}</td>
+                        <td class="px-4 py-3 border-b-2 border-gray-200">{{ hr.min_price }}</td>
                         <td class="px-4 py-3 border-b-2 border-gray-200">
                           <span v-if="hr.is_selling === 0">待機中</span>
                           <span v-if="hr.is_selling === 1">稼働中</span>
@@ -72,7 +72,7 @@ defineProps({
                     </svg>
                   </a>
                   <Link as="button" :href="route('hrs.create')"
-                    class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                    class="flex ml-auto text-white bg-teal-500 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded">
                   登録
                   </Link>
                 </div>

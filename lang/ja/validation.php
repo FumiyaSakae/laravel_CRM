@@ -155,8 +155,10 @@ return [
 
     'attributes' => [
         'name' => '名前',
-        'price' => '単価',
+        'hr_id' => '作業者名',
+        'min_price' => '単価',
         'company_name' => '会社名',
+        'customer_id' => '会社名',
         'pic_name' => '担当者名',
         'pic_kana'=> 'カナ',
         'gender'=> '性別',
@@ -166,6 +168,8 @@ return [
         'address' => '住所',
         'startDate' => '取引開始日',
         'memo' => '備考',
+        'current_price' => '単価',
+        'quantity' => '契約月数',
     ],
 
 ];
