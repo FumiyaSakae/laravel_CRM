@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('hr_id')->constrained()->onUpdate('cascade');
             $table->foreignId('purchase_id')->constrained()->onUpdate('cascade');
+            $table->integer('store_price');
             $table->integer('quantity');
             $table->timestamps();
         });

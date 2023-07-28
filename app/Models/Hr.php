@@ -23,7 +23,10 @@ class Hr extends Model
 
     protected $fillable = [
         'name',
+        'name_kana',
         'memo',
+        'area',
+        'start_process',
         'min_price',
         'is_selling',
         'current_price',

@@ -11,7 +11,10 @@ const props = defineProps({
 
 const form = reactive({
   id: props.hr.id,
+  area: null,
+  process: null,
   name: props.hr.name,
+  name_kana: props.hr.name_kana,
   memo: props.hr.memo,
   min_price: props.hr.min_price,
   is_selling: props.hr.is_selling
@@ -32,7 +35,7 @@ const updateHr = id => {
     </template>
 
     <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto sm:pr-4 sm:pl-60 lg:pr-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 text-gray-900">
             <section class="text-gray-600 body-font relative">
@@ -54,13 +57,14 @@ const updateHr = id => {
                           <div class="text-sm text-red-600" v-if="errors.name">{{ errors.name }}</div>
                         </div>
                       </div>
-                      <!-- <div class="p-2 w-1/2">
-                      <div class="relative">
-                        <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-                        <input type="email" id="email" name="email"
-                          class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                      <div class="p-2 w-full">
+                        <div class="relative">
+                          <label for="name_kana" class="leading-7 text-sm text-gray-600">フリガナ</label>
+                          <input type="text" id="name_kana" name="name_kana" v-model="form.name_kana"
+                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                          <div class="text-sm text-red-600" v-if="errors.name_kana">{{ errors.name_kana }}</div>
+                        </div>
                       </div>
-                    </div> -->
                       <div class="p-2 w-full">
                         <div class="relative">
                           <label for="min_price" class="leading-7 text-sm text-gray-600">単価</label>
@@ -88,7 +92,7 @@ const updateHr = id => {
 
                       <div class="p-2 w-full">
                         <button
-                          class="flex mx-auto text-white bg-teal-500 border-0 py-2 px-8 focus:outline-none hover:bg-teal-600 rounded text-lg">更新</button>
+                          class="flex mx-auto text-white bg-teal-500 border-0 py-2 px-8 focus:outline-none hover:bg-teal-400 rounded text-lg">更新</button>
                       </div>
                       <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
                         <a class="text-indigo-500">example@email.com</a>

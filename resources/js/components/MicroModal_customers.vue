@@ -88,9 +88,11 @@ const setCustomer = e => {
       </div>
     </div>
   </div>
-  <input
-    class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-ou"
-    name="customer" v-model="search">
-  <button class=" flex mx-auto text-white bg-blue-300 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded
+  <div class="flex">
+    <input
+      class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-ou"
+      name="customer" v-model="search">
+    <button class="w-1/3 text-white bg-teal-500 border-0 py-2 px-4 focus:outline-none hover:bg-teal-400 rounded
   text-lg" @click="searchCustomers" type="button" data-micromodal-trigger="modal-1">検索する</button>
+  </div>
 </template>

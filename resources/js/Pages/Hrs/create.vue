@@ -8,8 +8,12 @@ defineProps({
   errors: Object
 });
 
+const defArea = ['福岡県', '熊本県', '東京都', '宮城県', '愛知県'];
+
 const form = reactive({
   name: null,
+  name_kana: null,
+  area: null,
   memo: null,
   min_price: null,
 })
@@ -29,45 +33,56 @@ const storeHr = () => {
     </template>
 
     <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto sm:pr-4 sm:pl-60 lg:pr-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 text-gray-900">
             <section class="text-gray-600 body-font relative">
               <form @submit.prevent="storeHr">
                 <div class="container px-5 py-24 mx-auto">
                   <div class="flex flex-col text-center w-full mb-12">
-                    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
-                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon
-                      brooklyn
-                      asymmetrical gentrify.</p>
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+                      人材情報の入力
+                    </h1>
+                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">新しく稼働を開始する人材情報の入力ができます。</p>
                   </div>
                   <div class="lg:w-1/2 md:w-2/3 mx-auto">
                     <div class="flex flex-wrap -m-2">
                       <div class="p-2 w-full">
                         <div class="relative">
                           <label for="name" class="leading-7 text-sm text-gray-600">名前</label>
+                          <div class="text-sm text-red-600" v-if="errors.name">{{ errors.name }}</div>
                           <input type="text" id="name" name="name" v-model="form.name"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          <div class="text-sm text-red-600" v-if="errors.name">{{ errors.name }}</div>
                         </div>
                       </div>
-                      <!-- <div class="p-2 w-1/2">
-                      <div class="relative">
-                        <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-                        <input type="email" id="email" name="email"
-                          class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                      </div>
-                    </div> -->
                       <div class="p-2 w-full">
                         <div class="relative">
-                          <label for="min_price" class="leading-7 text-sm text-gray-600">単価</label>
+                          <label for="name_kana" class="leading-7 text-sm text-gray-600">フリガナ</label>
+                          <div class="text-sm text-red-600" v-if="errors.name_kana">{{ errors.name_kana }}</div>
+                          <input type="text" id="name_kana" name="name_kana" v-model="form.name_kana"
+                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                      </div>
+                      <div class="p-2 w-2/3">
+                        <div class="flex flex-col">
+                          <label for="area" class="leading-7 text-sm text-gray-600">作業場所</label>
+                          <div class="text-sm text-red-600" v-if="errors.area">{{ errors.area }}</div>
+                          <select name="area" v-model="form.area"
+                            class="w-1/2 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <option v-for="areas in defArea" :value="areas">{{ areas }}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="p-2 w-2/3">
+                        <div class="flex flex-col">
+                          <label for="min_price" class="leading-7 text-sm text-gray-600">最低単価</label>
+                          <div class="text-sm text-red-600" v-if="errors.min_price">{{ errors.min_price }}</div>
                           <input type="number" id="min_price" name="min_price" v-model="form.min_price"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          <div class="text-sm text-red-600" v-if="errors.min_price">{{ errors.min_price }}</div>
                         </div>
                       </div>
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="memo" class="leading-7 text-sm text-gray-600">備考</label>
                           <textarea id="memo" name="memo" v-model="form.memo"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
@@ -76,7 +91,7 @@ const storeHr = () => {
 
                       <div class="p-2 w-full">
                         <button
-                          class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">登録</button>
+                          class="flex mx-auto text-white bg-teal-500 border-0 py-2 px-8 focus:outline-none hover:bg-teal-400 rounded text-lg">登録</button>
                       </div>
                       <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
                         <a class="text-indigo-500">example@email.com</a>

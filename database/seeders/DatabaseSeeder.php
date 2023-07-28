@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             HrSeeder::class,
         ]);
 
-        Customer::factory(100)->create();
+        Customer::factory(10)->create();
 
         $hrs = Hr::all();
 
@@ -28,8 +28,10 @@ class DatabaseSeeder extends Seeder
         ->each(function(Purchase $purchase) use ($hrs){
             $purchase->hrs()->attach(
             $hrs->random(rand(1,3))->pluck('id')->toArray(),
-            ['quantity' => rand(1, 12)]
-            );
+            [
+                'quantity' => rand(1, 12),
+                'store_price' => rand(300000, 400000),
+            ]);
         });
         // \App\Models\User::factory(10)->create();
 

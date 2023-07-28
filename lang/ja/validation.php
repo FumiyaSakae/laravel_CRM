@@ -155,21 +155,26 @@ return [
 
     'attributes' => [
         'name' => '名前',
+        'name_kana' => 'フリガナ',
         'hr_id' => '作業者名',
+        'process' => '作業工程',
+        'area' => '作業エリア',
         'min_price' => '単価',
         'company_name' => '会社名',
         'customer_id' => '会社名',
         'pic_name' => '担当者名',
-        'pic_kana'=> 'カナ',
+        'pic_kana'=> 'フリガナ',
         'gender'=> '性別',
         'tel' => '電話番号',
         'email' => 'メールアドレス',
         'postcode' => '郵便番号',
         'address' => '住所',
-        'startDate' => '取引開始日',
+        'startDate' => '開始日',
+        'endDate' => '開始日',
         'memo' => '備考',
         'current_price' => '単価',
         'quantity' => '契約月数',
+        'start_process' => '作業工程',
     ],
 
 ];

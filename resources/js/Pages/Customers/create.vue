@@ -43,22 +43,20 @@ const fetchAddress = () => {
     </template>
 
     <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto sm:pr-4 sm:pl-60 lg:pr-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 text-gray-900">
             <section class="text-gray-600 body-font relative">
               <form @submit.prevent="storeCustomer">
                 <div class="container px-5 py-24 mx-auto">
                   <div class="flex flex-col text-center w-full mb-12">
-                    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
-                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon
-                      brooklyn
-                      asymmetrical gentrify.</p>
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">取引先情報の入力</h1>
+                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">新規に契約を開始する取引先情報の入力ができます。</p>
                   </div>
                   <div class="lg:w-1/2 md:w-2/3 mx-auto">
                     <div class="flex flex-wrap -m-2">
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="company_name" class="leading-7 text-sm text-gray-600">会社名</label>
                           <input type="text" id="company_name" name="company_name" v-model="form.company_name"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
@@ -66,7 +64,7 @@ const fetchAddress = () => {
                         </div>
                       </div>
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="pic_name" class="leading-7 text-sm text-gray-600">担当者名</label>
                           <input type="text" id="pic_name" name="pic_name" v-model="form.pic_name"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
@@ -74,7 +72,7 @@ const fetchAddress = () => {
                         </div>
                       </div>
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="pic_kana" class="leading-7 text-sm text-gray-600">担当者名(フリガナ)</label>
                           <input type="text" id="pic_kana" name="pic_kana" v-model="form.pic_kana"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
@@ -93,7 +91,7 @@ const fetchAddress = () => {
                         </div>
                       </div>
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="tel" class="leading-7 text-sm text-gray-600">電話番号</label>
                           <input type="tel" id="tel" name="tel" v-model="form.tel"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
@@ -101,7 +99,7 @@ const fetchAddress = () => {
                         </div>
                       </div>
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
                           <input type="email" id="email" name="email" v-model="form.email"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
@@ -109,7 +107,7 @@ const fetchAddress = () => {
                         </div>
                       </div>
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="postcode" class="leading-7 text-sm text-gray-600">郵便番号</label>
                           <input type="number" id="postcode" name="postcode" @change="fetchAddress"
                             v-model="form.postcode"
@@ -118,7 +116,7 @@ const fetchAddress = () => {
                         </div>
                       </div>
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="address" class="leading-7 text-sm text-gray-600">住所</label>
                           <input type="text" id="address" name="address" v-model="form.address"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
@@ -133,7 +131,7 @@ const fetchAddress = () => {
                       </div>
                     </div> -->
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="startDate" class="leading-7 text-sm text-gray-600">取引開始日</label>
                           <input type="date" id="startDate" name="startDate" v-model="form.startDate"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
@@ -141,7 +139,7 @@ const fetchAddress = () => {
                         </div>
                       </div>
                       <div class="p-2 w-full">
-                        <div class="relative">
+                        <div class="flex flex-col">
                           <label for="memo" class="leading-7 text-sm text-gray-600">備考</label>
                           <textarea id="memo" name="memo" v-model="form.memo"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
@@ -150,7 +148,7 @@ const fetchAddress = () => {
 
                       <div class="p-2 w-full">
                         <button
-                          class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">登録</button>
+                          class="flex mx-auto text-white bg-teal-500 border-0 py-2 px-8 focus:outline-none hover:bg-teal-400 rounded text-lg">登録</button>
                       </div>
                       <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
                         <a class="text-indigo-500">example@email.com</a>

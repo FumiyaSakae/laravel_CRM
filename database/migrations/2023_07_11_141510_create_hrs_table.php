@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('name_kana');
+            $table->string('area');
+            $table->string('current_process')->nullable();
             $table->string('memo')->nullable();
             $table->integer('min_price');
             $table->integer('current_price')->nullable();

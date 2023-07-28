@@ -26,6 +26,7 @@ class StorePurchaseRequest extends FormRequest
             'hr_id' => ['required'],
             'current_price' => ['required'],
             'quantity' => ['required'],
+            'start_process' => ['required'],
         ];
     }
 }

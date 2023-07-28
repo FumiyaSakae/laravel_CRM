@@ -2,49 +2,63 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { getToday } from '@/common'
+import { n12br } from '@/common';
 import { onMounted, reactive, ref, computed } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import MicroModalCustomers from '@/components/MicroModal_customers.vue';
 import MicroModalHrs from '@/components/MicroModal_hrs.vue';
 
 const props = defineProps({
-  'customers': Array,
   'hrs': Array,
   errors: Object
 })
 
 onMounted(() => {
-  form.date = getToday();
+  form.startDate = getToday();
 })
 
-const quantity = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',]
+const quantity = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',]
+
+const useProcess = ['要件定義', '基本設計', '詳細設計', '開発', 'テスト', '保守・運用',]
+
 
 const hrList = ref([]);
+const processList = ref([]);
 
 const form = reactive({
-  date: null,
+  startDate: null,
+  endDate: null,
   customer_id: null,
-  status: true,
   hrs: [],
+  start_process: null,
+  end_process: null,
   current_price: null,
   quantity: null,
   hr_id: null,
+  contr_detail: '案件概要：\n技術要素：\n作業場所：',
 })
+
 
 const totalPrice = computed(() => {
   let total = 0
-  total += form.current_price * form.quantity
+  hrList.value.forEach(hr => {
+    total += hr.current_price * hr.quantity
+  })
   return total
 })
 
 const storePurchase = () => {
   hrList.value.forEach(hr => {
-    if (form.quantity > 0) {
+    if (hr.quantity > 0) {
       form.hrs.push({
         id: hr.id,
-        quantity: form.quantity
+        current_price: hr.current_price,
+        store_price: hr.current_price,
+        quantity: hr.quantity
       })
     }
+    form.current_price = hr.current_price
+    form.quantity = hr.quantity
   })
   Inertia.post(route('purchases.store'), form)
 }
@@ -53,12 +67,17 @@ const setCustomerId = (id) => {
   form.customer_id = id
 }
 
-const setHrId = (id) => {
+const setHrData = (id, name) => {
   form.hr_id = id,
     hrList.value.push({
-      id: id
+      id: id,
+      name: name
     })
   console.log(id)
+}
+
+const setProcess = (value) => {
+  console.log(value);
 }
 
 
@@ -73,23 +92,27 @@ const setHrId = (id) => {
     </template>
 
     <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto sm:pr-4 sm:pl-60 lg:pr-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 text-gray-900">
             <section class="text-gray-600 body-font relative">
               <form @submit.prevent="storePurchase">
                 <div class="container px-5 py-24 mx-auto">
                   <div class="flex flex-col text-center w-full mb-12">
-                    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
-                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon
-                      brooklyn
-                      asymmetrical gentrify.</p>
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">新規契約登録</h1>
                   </div>
-                  <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                  <div class="lg:w-3/4 md:w-3/4 mx-auto">
                     <div class="p-2 w-full">
                       <div class="relative">
-                        <label for="date" class="leading-7 text-sm text-gray-600">登録日</label>
-                        <input type="date" id="date" name="date" v-model="form.date"
+                        <label for="startDate" class="leading-7 text-sm text-gray-600">契約開始日</label>
+                        <input type="date" id="startDate" name="startDate" v-model="form.startDate"
+                          class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                      </div>
+                    </div>
+                    <div class="p-2 w-full">
+                      <div class="relative">
+                        <label for="endDate" class="leading-7 text-sm text-gray-600">契約終了日</label>
+                        <input type="date" id="endDate" name="endDate" v-model="form.endDate"
                           class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                       </div>
                     </div>
@@ -107,86 +130,90 @@ const setHrId = (id) => {
                         <MicroModalCustomers @update:customerId="setCustomerId" />
                       </div>
                     </div>
-                    <div class="p-2 w-full">
-                      <div class="">
-                        <label for="pic_name" class="leading-7 text-sm text-gray-600">作業者名</label>
-                        <div class="text-sm text-red-600" v-if="errors.hr_id">{{ errors.hr_id }}</div>
-                        <MicroModalHrs @update:hrId="setHrId" />
-                      </div>
-                    </div>
-                    <div class="p-2 w-1/2">
-                      <div class="flex flex-col">
-                        <label for="current_price" class="leading-7 text-sm text-gray-600">単価</label>
-                        <div class="text-sm text-red-600" v-if="errors.current_price">{{ errors.current_price }}</div>
-                        <input type="number" id="current_price" name="current_price" v-model="form.current_price"
-                          class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                      </div>
-                    </div>
-                    <div class="p-2 w-1/2">
-                      <div class="flex flex-col">
-                        <label for="quantity" class="leading-7 text-sm text-gray-600">契約予定月数</label>
-                        <div class="text-sm text-red-600" v-if="errors.quantity || form.quantity == 0">
-                          {{ errors.quantity }}
+                    <div class="lg:w-full mx-auto overflow-auto mt-8">
+                      <div class="p-2 w-full">
+                        <div class="">
+                          <label for="pic_name" class="leading-7 text-sm text-gray-600">作業者名</label>
+                          <div class="text-sm text-red-600" v-if="errors.hr_id">{{ errors.hr_id }}</div>
+                          <div class="text-sm text-red-600" v-if="errors.current_price">{{ errors.current_price }}</div>
+                          <div class="text-sm text-red-600" v-if="errors.quantity">{{ errors.quantity }}</div>
+                          <MicroModalHrs @update:hrData="setHrData" />
                         </div>
-                        <select name="quantity" v-model="form.quantity"
-                          class="w-1/2 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                          <option v-for="q in quantity" :value="q">{{ q }}ヶ月</option>
+                      </div>
+                      <table v-if="hrList.length !== 0" class="table-auto w-full text-left whitespace-no-wrap mt-4">
+                        <thead>
+                          <tr>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                              No</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                              作業者名</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                              単価</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                              契約予定月数</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="hr in hrList">
+                            <td class="px-4 py-3 border-b-2 border-gray-200">{{ hr.id }}</td>
+                            <td class="px-4 py-3 border-b-2 border-gray-200">{{ hr.name }}</td>
+                            <td class="px-4 py-3 border-b-2 border-gray-200">
+                              <input type="number" id="current_price" name="current_price" v-model="hr.current_price"
+                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            </td>
+                            <td class="px-4 py-3 border-b-2 border-gray-200">
+                              <select name="quantity" v-model="hr.quantity"
+                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <option v-for=" q  in  quantity " :value="q">{{ q }}ヶ月</option>
+                              </select>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="p-2 w-2/3 ml-auto">
+                      <div class="flex flex-col text-end">
+                        <label for="totalPrice" class="ml-auto leading-7 text-sm text-gray-600">売上小計</label>
+                        <div
+                          class="pr-3 ml-auto w-1/2 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 pl-3 pr-18 leading-8 transition-colors duration-200 ease-in-out"
+                          v-if="isNaN(totalPrice)">計算中...</div>
+                        <div
+                          class="pr-3 ml-auto w-1/2 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-red-500 py-1 pl-3 pr-18 leading-8 transition-colors duration-200 ease-in-out"
+                          v-else>{{ totalPrice }}円</div>
+                      </div>
+                    </div>
+                    <div class="p-2 flex mt-10">
+                      <div class="flex flex-col">
+                        <label for="process" class="leading-7 text-sm text-gray-600">開始工程</label>
+                        <select name="process" v-model="form.start_process"
+                          class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 pl-3 pr-18 leading-8 transition-colors duration-200 ease-in-out">
+                          <option type="text" v-for="start_pro in useProcess">
+                            {{ start_pro }}
+                          </option>
+                        </select>
+                      </div>
+                      <p class="flex pt-5 items-center mr-10 ml-10">〜</p>
+                      <div class="flex flex-col">
+                        <label for="process" class="leading-7 text-sm text-gray-600">終了工程</label>
+                        <select name="process" v-model="form.end_process"
+                          class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 pl-3 pr-18 leading-8 transition-colors duration-200 ease-in-out">
+                          <option type="text" v-for=" end_pro in useProcess">
+                            {{ end_pro }}
+                          </option>
                         </select>
                       </div>
                     </div>
-                    <div class="p-2 w-2/3">
+                    <div class="text-sm text-red-600" v-if="errors.start_process">
+                      {{ errors.start_process }}
+                    </div>
+                    <div class="p-2 w-full mt-10">
                       <div class="flex flex-col">
-                        <label for="totalPrice" class="leading-7 text-sm text-gray-600">売上小計</label>
-                        <div class="text-sm text-red-600">{{ totalPrice }}円</div>
+                        <label for="contr_detail" class="leading-7 text-sm text-gray-600">契約詳細</label>
+                        <textarea id="contr_detail" name="contr_detail" v-model="form.contr_detail"
+                          class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">
+                        </textarea>
                       </div>
                     </div>
-                    <!-- <div class="w-full mt-4 mx-auto overflow-auto">
-                        <table class="table-auto w-full text-left whitespace-no-wrap">
-                          <thead>
-                            <tr>
-                              <th
-                                class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
-                                ID</th>
-                              <th
-                                class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                作業者名</th>
-                              <th
-                                class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                単金</th>
-                              <th
-                                class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                契約予定月数</th>
-                              <th
-                                class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
-                                売上小計</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr v-for="hr in hrList" :key="hr.id">
-                              <td class="px-4 py-3 border-b-2 border-gray-200">{{ hr.id }}</td>
-                              <td class="px-4 py-3 border-b-2 border-gray-200">{{ hr.name }}</td>
-                              <td class="px-4 py-3 border-b-2 border-gray-200">{{ hr.price }}</td>
-                              <td class="px-4 py-3 border-b-2 border-gray-200">
-                                <select name="quantity" v-model="hr.quantity">
-                                  <option v-for="q in quantity" :value="q">{{ q }}</option>
-                                </select>
-                              </td>
-                              <td class="px-4 py-3 border-b-2 border-gray-200">{{ hr.current_price * hr.quantity }}</td>
-                              <td class="w-10 text-center border-b-2 border-gray-200">
-                                <input name=" plan" type="radio">
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-
-                      <div class="p-2 w-full">
-                        <div class="">
-                          <label for="price" class="leading-7 text-sm text-gray-600">合計金額</label>
-                          <div class="text-sm text-red-600">{{ totalPrice }}円</div>
-                        </div>
-                      </div> -->
-
                     <div class="p-2 w-full">
                       <button
                         class="flex mx-auto text-white bg-teal-500 border-0 py-2 px-8 focus:outline-none hover:bg-teal-600 rounded text-lg">登録</button>

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->date('startDate');
+            $table->date('endDate')->nullable();
+            $table->string('start_process')->nullable();
+            $table->string('end_process')->nullable();
+            $table->string('contr_detail')->nullable();
             $table->foreignId('customer_id')->constrained()->onUpdate('cascade');
             $table->boolean('status');
             $table->timestamps();

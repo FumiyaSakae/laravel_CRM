@@ -11,8 +11,24 @@ class Purchase extends Model
 {
     use HasFactory;
 
+    public function scopeSearchCustomers($query, $input = null){
+        if(!empty($input)){
+            if(Customer::where('company_name', 'like', '%' . $input . '%')
+            ->exists())
+            {
+                return $query->where('company_name', 'like', '%' . $input . '%')
+                ;
+            }
+        }
+    }
+
     protected $fillable = [
+        'startDate',
+        'endDate',
+        'start_process',
+        'end_process',
         'customer_id',
+        'contr_detail',
         'status',
     ];
 

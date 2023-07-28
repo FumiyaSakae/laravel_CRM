@@ -12,11 +12,14 @@ class Customer extends Model
 
     public function scopeSearchCustomers($query, $input = null){
         if(!empty($input)){
-            if(Customer::where('company_name', 'like', $input . '%')
+            if(Customer::where('company_name', 'like', '%' . $input . '%')
             ->exists())
             {
-                return $query->where('company_name', 'like', $input . '%')
-                ;
+                return $query->where('company_name', 'like', '%' . $input . '%');
+            } elseif(Customer::where('pic_name', 'like', '%' . $input . '%')
+            ->exists())
+            {
+                return $query->where('pic_name', 'like', '%' . $input . '%');
             }
         }
     }

@@ -22,7 +22,8 @@ class UpdateHrRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:50'],
+            'name' => ['required', 'max:20'],
+            'name_kana' => ['required', 'max:20'],
             'min_price' =>['required', 'numeric'],
             'is_selling' =>['required', 'numeric'],
         ];
