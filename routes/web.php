@@ -8,6 +8,7 @@ use App\Http\Controllers\HrController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\AnalysisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,22 +26,25 @@ Route::resource('hrs', HrController::class)->middleware(['auth', 'verified']);
 Route::resource('customers', CustomerController::class)->middleware(['auth', 'verified']);
 Route::resource('purchases', PurchaseController::class)->middleware(['auth', 'verified']);
 
-// Practiceルーティングページ
-Route::get('/Top', function () {
-    return Inertia::render('TopPage');
-    }
-);
+// 分析ページ
+Route::get('analysis', [AnalysisController::class, 'index'])->name('analysis');
 
-Route::get('/Top/index',[PageController::class, 'index'])->name('topPage.index');
-Route::get('/Top/create',[PageController::class, 'create'])->name('topPage.create');
-Route::post('/Top',[PageController::class, 'store'])->name('topPage.store');
-Route::get('/Top/show/{id}',[PageController::class, 'show'])->name('topPage.show');
-Route::delete('/Top/{id}',[PageController::class, 'delete'])->name('topPage.delete');
+// // Practiceルーティングページ
+// Route::get('/Top', function () {
+//     return Inertia::render('TopPage');
+//     }
+// );
 
-Route::get('/component-test', function () {
-    return Inertia::render('ComponentTest');
-    }
-);
+// Route::get('/Top/index',[PageController::class, 'index'])->name('topPage.index');
+// Route::get('/Top/create',[PageController::class, 'create'])->name('topPage.create');
+// Route::post('/Top',[PageController::class, 'store'])->name('topPage.store');
+// Route::get('/Top/show/{id}',[PageController::class, 'show'])->name('topPage.show');
+// Route::delete('/Top/{id}',[PageController::class, 'delete'])->name('topPage.delete');
+
+// Route::get('/component-test', function () {
+//     return Inertia::render('ComponentTest');
+//     }
+// );
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [

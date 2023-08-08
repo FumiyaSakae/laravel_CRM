@@ -37,4 +37,8 @@ class Order extends Model
     protected static function booted(){
         static::addGlobalScope(new Subtotal);
     }
+
+    // public function scopeBetweenDate($query, $startDate = null, $endDate = null){
+    //     if(is_null($startDate) & is_null($endDate))
+    // }
 }
