@@ -1,0 +1,22 @@
+<script setup>
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { Link } from '@inertiajs/vue3';
+</script>
+
+<template>
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-white-100">
+        <div>
+            <Link href="/">
+            <div class="w-28 h-28 fill-current text-gray-500">
+                <img src="/images/def_logo.png">
+            </div>
+
+            </Link>
+        </div>
+
+        <div
+            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg border border-gray-400">
+            <slot />
+        </div>
+    </div>
+</template>

@@ -81,7 +81,7 @@ return [
     'max'                  => [
         'numeric' => ':attributeには、:max以下の数字を指定してください。',
         'file'    => ':attributeには、:max kB以下のファイルを指定してください。',
-        'string'  => ':attributeは、:max文字以下で指定してください。',
+        'string'  => ':attributeは、:max文字以下で入力してください。',
         'array'   => ':attributeは:max個以下指定してください。',
     ],
     'mimes'                => ':attributeには:valuesタイプのファイルを指定してください。',
@@ -99,7 +99,7 @@ return [
     'password'             => '正しいパスワードを指定してください。',
     'present'              => ':attributeが存在していません。',
     'regex'                => ':attributeに正しい形式を指定してください。',
-    'required'             => ':attributeは必ず指定してください。',
+    'required'             => ':attributeは必ず入力してください。',
     'required_if'          => ':otherが:valueの場合、:attributeも指定してください。',
     'required_unless'      => ':otherが:valuesでない場合、:attributeを指定してください。',
     'required_with'        => ':valuesを指定する場合は、:attributeも指定してください。',
@@ -153,6 +153,28 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => '名前',
+        'name_kana' => 'フリガナ',
+        'hr_id' => '作業者名',
+        'process' => '作業工程',
+        'area' => '作業エリア',
+        'min_price' => '単価',
+        'company_name' => '会社名',
+        'customer_id' => '会社名',
+        'pic_name' => '担当者名',
+        'pic_kana'=> 'フリガナ',
+        'gender'=> '性別',
+        'tel' => '電話番号',
+        'email' => 'メールアドレス',
+        'postcode' => '郵便番号',
+        'address' => '住所',
+        'startDate' => '開始日',
+        'endDate' => '開始日',
+        'memo' => '備考',
+        'current_price' => '単価',
+        'quantity' => '契約月数',
+        'start_process' => '作業工程',
+    ],
 
 ];
